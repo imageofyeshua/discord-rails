@@ -5,6 +5,8 @@ class User < ApplicationRecord # Include default devise modules. Others availabl
 
   before_validation :set_user_number, if: -> { !user_number.present? }
 
+  has_many :owned_servers, class_name: "Server", foreign_key: "owner_id"
+
   private
 
   def set_user_number
