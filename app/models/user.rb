@@ -8,7 +8,7 @@ class User < ApplicationRecord # Include default devise modules. Others availabl
   private
 
   def set_user_number
-    other_users_with_same_username = User.where(username: username)
+    other_users_with_same_username = User.where("lower(username) like lower(?)", "%#{username}%")
     self.user_number = other_users_with_same_username.count + 1
   end
 end
