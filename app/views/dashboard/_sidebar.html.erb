@@ -1,0 +1,14 @@
+<div class="w-80 min-h-screen bg-gray-700 flex flex-col p-4">
+  <div class="flex w-full justify-end">
+    <%= link_to "Create Server",
+    new_server_path,
+    class: "text-lg text-gray-100 px-3 py-2 rounded-lg bg-blue-500" %>
+  </div>
+
+  <div class="flex flex-col gap-2 mt-4">
+    <% current_user.owned_servers.order(created_at: :desc).each do |server| %>
+      <div class="p-2 w-full bg-gray-600">
+        <span class="text-xl text-gray-100"><%= server.name %></span>
+      </div>
+    <% end %>
+  </div>

@@ -21,7 +21,7 @@ class ServersController < ApplicationController
 
   # POST /servers or /servers.json
   def create
-    @server = Server.new(server_params)
+    @server = current_user.owned_servers.new(server_params)
 
     respond_to do |format|
       if @server.save
@@ -58,13 +58,14 @@ class ServersController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_server
-      @server = Server.find(params.expect(:id))
-    end
 
-    # Only allow a list of trusted parameters through.
-    def server_params
-      params.expect(server: [ :name, :owner_id ])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_server
+    @server = Server.find(params.expect(:id))
+  end
+
+  # Only allow a list of trusted parameters through.
+  def server_params
+    params.expect(server: [:name, :owner_id])
+  end
 end
