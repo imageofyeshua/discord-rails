@@ -1,3 +1,6 @@
-<div class="w-full min-h-screen bg-indigo-900">
+<div class="w-full h-screen bg-indigo-900 flex pt-16 overflow-hidden">
   <%= render "sidebar" %>
+  <div class="w-full flex flex-col">
+    <%= turbo_frame_tag :dashboard %>
+  </div>
 </div>

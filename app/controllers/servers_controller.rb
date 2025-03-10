@@ -23,14 +23,10 @@ class ServersController < ApplicationController
   def create
     @server = current_user.owned_servers.new(server_params)
 
-    respond_to do |format|
-      if @server.save
-        format.html { redirect_to @server, notice: "Server was successfully created." }
-        format.json { render :show, status: :created, location: @server }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @server.errors, status: :unprocessable_entity }
-      end
+    if @server.save
+      redirect_to root_path
+    else
+      render :new, status: :unprocessable_entity
     end
   end
 
